@@ -1,27 +1,22 @@
 import express from 'express';
+import { createUser, getUsers, getUserById, deleteUser, updateUser } from '../controllers/users.js'
 
 const router = express.Router();
 
-const users = [
-    {
-        firstName: "Tiemi",
-        lastName: "Maeda",
-        age: 31
-    },
-    {
-        firstName: "Bruno",
-        lastName: "Davanzo",
-        age: 26
-    }
-]
+//get all users - GET request
+router.get('/', getUsers);
 
-router.get('/', (req, res) => {
-    console.log(users);
-    res.send(users);
-});
+//post new user - POST request
+router.post('/', createUser);
 
-router.post('/', (req, res) => {
-    
-});
+//get a user by id - GET request
+router.get('/:id', getUserById);
+
+//delete a user by id - DELETE request
+router.delete('/:id', deleteUser);
+
+//update a user info - PATCH request chamges partially, 
+//while PUT request overrides all the info
+router.patch('/:id', updateUser);
 
 export default router;
